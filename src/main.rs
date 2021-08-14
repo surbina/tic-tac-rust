@@ -1,36 +1,23 @@
+mod grid;
+mod tic_tac_toe;
+
+use grid::Grid;
 use yew::prelude::*;
 
-enum Msg {
-    AddOne,
-}
+enum Msg {}
 
-struct Model {
-    // `ComponentLink` is like a reference to a component.
-    // It can be used to send messages to the component
-    link: ComponentLink<Self>,
-    value: i64,
-}
+struct Model {}
 
 impl Component for Model {
     type Message = Msg;
     type Properties = ();
 
-    fn create(_props: Self::Properties, link: ComponentLink<Self>) -> Self {
-        Self {
-            link,
-            value: 0,
-        }
+    fn create(_props: Self::Properties, _link: ComponentLink<Self>) -> Self {
+        Self {}
     }
 
-    fn update(&mut self, msg: Self::Message) -> ShouldRender {
-        match msg {
-            Msg::AddOne => {
-                self.value += 1;
-                // the value has changed so we need to
-                // re-render for it to appear on the page
-                true
-            }
-        }
+    fn update(&mut self, _msg: Self::Message) -> ShouldRender {
+        true
     }
 
     fn change(&mut self, _props: Self::Properties) -> ShouldRender {
@@ -43,8 +30,7 @@ impl Component for Model {
     fn view(&self) -> Html {
         html! {
             <div>
-                <button onclick=self.link.callback(|_| Msg::AddOne)>{ "+1" }</button>
-                <p>{ self.value }</p>
+                <Grid />
             </div>
         }
     }
